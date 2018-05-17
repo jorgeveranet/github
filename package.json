@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint src test",
+    "lint:fix": "eslint --fix src test",
+    "security": "nsp check",
+    "start": "node src/index.js",
+    "test": "NODE_ENV=test mocha '{,!(node_modules)/**/}*.test.js'"
   },
   "keywords": [],
   "author": "",
