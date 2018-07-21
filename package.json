@@ -11,7 +11,7 @@
     "lint": "eslint src test",
     "lint:fix": "eslint --fix src test",
     "security": "nsp check",
-    "start": "node src/index.js",
+    "start": "npm t",
     "test": "NODE_ENV=test mocha '{,!(node_modules)/**/}*.test.js'"
   },
   "keywords": [],
