@@ -2,7 +2,7 @@ const Repo = require('../../../src/lib/repo')
 const uuidv1 = require('uuid/v1')
 
 const user = process.env.GITHUB_USER
-const password = process.env.GITHU_PASS
+const password = process.env.GITHU_PASS_OR_PERSONAL_TOKEN
 const repo = new Repo(user, password)
 
 describe('repo lib', () => {
