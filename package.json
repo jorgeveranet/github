@@ -1,11 +1,11 @@
 {
-  "name": "app",
+  "name": "tiny-octokit",
   "version": "0.1.0",
   "description": "starting something awesome...",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jorgeveranet/app.git"
+    "url": "https://github.com/jorgeveranet/tiny-octokit.git"
   },
   "scripts": {
     "lint": "eslint src test",
