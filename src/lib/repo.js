@@ -49,6 +49,10 @@ class Repo {
       throw err
     }
   }
+
+  async delete(name) {
+    return octokit.repos.delete({ owner: username, repo: name })
+  }
 }
 
 module.exports = Repo
