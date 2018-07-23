@@ -8,26 +8,34 @@ const repo = new Repo(user, password)
 describe('repo lib', () => {
   it('creates, gets info, commit files and delete repo', async () => {
     try {
-      const name = uuidv1()
+      const repoName = uuidv1()
 
       // repo is created
-      const { clone_url: createdUrl } = await repo.create(name)
+      const { clone_url: createdUrl } = await repo.create(repoName)
       expect(createdUrl, 'repo is created').to.equal(
-        `https://github.com/${user}/${name}.git`
+        `https://github.com/${user}/${repoName}.git`
       )
 
       // gets info
-      const { clone_url: infoUrl } = await repo.get(name)
+      const { clone_url: infoUrl } = await repo.get(repoName)
       expect(infoUrl, 'gets info').to.be.equal(
-        `https://github.com/${user}/${name}.git`
+        `https://github.com/${user}/${repoName}.git`
       )
 
-      // commit files
+      // commit file
+      const { status: commitStatus } = await repo.commit(
+        repoName,
+        __filename,
+        'test/integration/lib/repo.test.js',
+        'Add repo test file'
+      )
+      const successCreated = 201
+      expect(commitStatus, 'commit file').to.equal(successCreated)
 
       // delete repo
-      const { status } = await repo.delete(name)
+      const { status } = await repo.delete(repoName)
       const successNoContent = 204
-      expect(status).to.equal(successNoContent)
+      expect(status, 'delete repo').to.equal(successNoContent)
     } catch (err) {
       throw err
     }

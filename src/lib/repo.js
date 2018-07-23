@@ -1,3 +1,5 @@
+const fs = require('fs')
+const util = require('util')
 const octokit = require('@octokit/rest')({
   timeout: 0,
   headers: {
@@ -52,6 +54,25 @@ class Repo {
 
   async delete(name) {
     return octokit.repos.delete({ owner: username, repo: name })
+  }
+
+  async commit(repoName, file, pathInRepo, message, branch = 'master') {
+    try {
+      const readFile = util.promisify(fs.readFile)
+      const buffer = await readFile(file)
+      const content = buffer.toString('base64')
+
+      return octokit.repos.createFile({
+        owner: username,
+        repo: repoName,
+        path: pathInRepo,
+        message,
+        content,
+        branch
+      })
+    } catch (err) {
+      throw err
+    }
   }
 }
 
